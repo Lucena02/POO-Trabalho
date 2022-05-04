@@ -1,3 +1,5 @@
+package POOTrabalho.src;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -5,13 +7,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CasaInteligente {
-    private Map<String,SmartDevices> devices;
+    private Map<String,SmartDevice> devices;
     private Map<String, List<String>> divisoes;
     private String nomeP;
     private int nif;
     private String nomeFornecedor;
 
-    public CasaInteligente(Map<String, SmartDevices> devices, Map<String, List<String>> divisoes,
+    public CasaInteligente(Map<String, SmartDevice> devices, Map<String, List<String>> divisoes,
                            String nomeP, int nif, String nomeFornecedor) {
         setDevices(devices);
         setDivisoes(divisoes);
@@ -36,14 +38,14 @@ public class CasaInteligente {
         this.nomeFornecedor = "";
     }
 
-    public Map<String, SmartDevices> getDevices() {
+    public Map<String, SmartDevice> getDevices() {
         return  devices
                 .entrySet()
                 .stream()
                 .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().clone()));
     }
 
-    public void setDevices(Map<String, SmartDevices> devices) {
+    public void setDevices(Map<String, SmartDevice> devices) {
         this.devices = new HashMap<>();
 
         devices.forEach((key,value) -> this.devices.put(key,value.clone()));
@@ -95,7 +97,7 @@ public class CasaInteligente {
         return (this.divisoes.get(room).contains(code));
     }
 
-    public void addDevice(SmartDevices sd, String divisao){
+    public void addDevice(SmartDevice sd, String divisao){
         this.devices.put(sd.getCodigo(),sd.clone());
 
         for(Map.Entry<String,List<String>> g : divisoes.entrySet()){
@@ -105,7 +107,7 @@ public class CasaInteligente {
         }
     }
 
-    public SmartDevices getDevice(String code){
+    public SmartDevice getDevice(String code){
         if(existsDevice(code)){
             return this.devices.get(code).clone();
         }

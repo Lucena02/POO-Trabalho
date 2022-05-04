@@ -1,34 +1,37 @@
+package POOTrabalho.src;
+
 import java.util.Objects;
 
-public class SmartSpeaker extends SmartDevices {
+public class SmartSpeaker extends SmartDevice {
     private int volume; // como limitar entre 0 a 100?
-    private double frequencia; //tipo de dado na frequencia?
-    private String marca; // que ser final?
+    private String canal;
+    private String marca;
 
-    public SmartSpeaker(Modo modo, String codigo, double custoInstalacao, double consumoDiario, int volume, double frequencia, String marca) {
+    public SmartSpeaker(Modo modo, String codigo, double custoInstalacao, double consumoDiario, int volume, String canal, String marca) {
         super(modo, codigo, custoInstalacao, consumoDiario);
         this.volume = volume;
-        this.frequencia = frequencia;
+        this.canal = canal;
         this.marca = marca;
     }
 
-    public SmartSpeaker(SmartDevices sd, int volume, double frequencia, String marca) {
+    public SmartSpeaker(SmartDevice sd, int volume, String canal, String marca) {
         super(sd);
         this.volume = volume;
-        this.frequencia = frequencia;
+        this.canal = canal;
         this.marca = marca;
     }
 
     public SmartSpeaker(SmartSpeaker ss){
+        super(ss);
         this.volume = ss.getVolume();
-        this.frequencia = ss.getFrequencia();
+        this.canal = ss.getCanal();
         this.marca = ss.getMarca();
     }
 
     public SmartSpeaker(){
         super();
         this.volume = 0;
-        this.frequencia = 0;
+        this.canal = "";
         this.marca = "";
     }
 
@@ -40,12 +43,12 @@ public class SmartSpeaker extends SmartDevices {
         this.volume = volume;
     }
 
-    public double getFrequencia() {
-        return frequencia;
+    public String getCanal() {
+        return canal;
     }
 
-    public void setFrequencia(double frequencia) {
-        this.frequencia = frequencia;
+    public void setCanal(String canal) {
+        this.canal = canal;
     }
 
     public String getMarca() {
@@ -63,7 +66,7 @@ public class SmartSpeaker extends SmartDevices {
 
     @Override
     public SmartSpeaker clone(){
-        return new SmartSpeaker(this); // como funcionar com o construtor
+        return new SmartSpeaker(this);
     }
     @Override
     public String toString() {
@@ -71,7 +74,7 @@ public class SmartSpeaker extends SmartDevices {
         sb.append(super.toString())
                 .append("SmartSpeaker: ").append(this.marca)
                 .append("\nVolume: ").append(this.volume)
-                .append("\nFrequencia: ").append(this.frequencia);
+                .append("\nCanal: ").append(this.canal);
         return sb.toString();
     }
 
@@ -83,6 +86,6 @@ public class SmartSpeaker extends SmartDevices {
         SmartSpeaker that = (SmartSpeaker) o;
         return this.marca.equals(that.getMarca()) &&
                 this.volume== that.getVolume() &&
-                this.frequencia == that.getFrequencia();
+                this.canal.equals(that.getCanal());
     }
 }

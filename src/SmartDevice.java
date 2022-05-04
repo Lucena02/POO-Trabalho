@@ -1,15 +1,17 @@
-public abstract class SmartDevices {
+package POOTrabalho.src;
+
+    public abstract class SmartDevice {
     public enum Modo {
         ON,
         OFF
     }
     private Modo modo;
     private String codigo;
-    private double consumoDiario;
+        private double consumoDiario;
     private double custoInstalacao;
 
 
-    public SmartDevices(){
+    public SmartDevice(){
         this.modo = Modo.OFF;
         this.codigo = null;
         this.consumoDiario = 0;
@@ -17,20 +19,20 @@ public abstract class SmartDevices {
 
     }
 
-    public SmartDevices (Modo modo, String codigo, double custoInstalacao, double consumoDiario) {
+    public SmartDevice (Modo modo, String codigo, double custoInstalacao, double consumoDiario) {
         this.modo = modo;
         this.codigo = codigo;
         this.custoInstalacao = custoInstalacao;
         this.consumoDiario = consumoDiario;
     }
 
-    public SmartDevices(SmartDevices sd){
+    public SmartDevice(SmartDevice sd){
         this.modo = sd.getModo();
         this.codigo= sd.getCodigo();
         this.consumoDiario = sd.getConsumoDiario();
         this.custoInstalacao = sd.getCustoInstalacao();
     }
-    public  abstract double calculoCusto();
+    public abstract double calculoCusto();
 
     public Modo getModo() {
         return modo;
@@ -85,14 +87,14 @@ public abstract class SmartDevices {
         if (this ==o) return true;
         if ((o==null) || (this.getClass() != o.getClass())) return false;
 
-        SmartDevices sd = (SmartDevices) o;
+        SmartDevice sd = (SmartDevice) o;
         return  sd.getModo() == this.modo &&
                 this.codigo.equals(sd.getCodigo()) &&
                 sd.getCustoInstalacao() == this.custoInstalacao &&
                 sd.getConsumoDiario() == this.getConsumoDiario();
     }
 
-//clone abstract() e necessario?
+    public abstract SmartDevice clone();
 
 
 }
