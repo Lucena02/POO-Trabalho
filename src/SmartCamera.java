@@ -1,6 +1,6 @@
 package POOTrabalho.src;
 
-public class SmartCamera extends SmartDevices{
+public class SmartCamera extends SmartDevice{
 
     public double calculoCusto(){
 
