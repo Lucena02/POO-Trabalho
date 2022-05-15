@@ -7,7 +7,7 @@ package POOTrabalho.src;
     }
     private Modo modo;
     private String codigo;
-        private double consumoDiario;
+    private double consumoDiario;
     private double custoInstalacao;
 
 

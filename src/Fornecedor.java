@@ -1,6 +1,6 @@
 package POOTrabalho.src;
 
-public class Fornecedor {
+public abstract class Fornecedor {
 
 
-}
+    }

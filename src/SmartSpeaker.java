@@ -3,20 +3,22 @@ package POOTrabalho.src;
 import java.util.Objects;
 
 public class SmartSpeaker extends SmartDevice {
-    private int volume; // como limitar entre 0 a 100?
+    private int volume;
+    public static final int MAX = 100;
+    public static final int MIN = 0;
     private String canal;
     private String marca;
 
     public SmartSpeaker(Modo modo, String codigo, double custoInstalacao, double consumoDiario, int volume, String canal, String marca) {
         super(modo, codigo, custoInstalacao, consumoDiario);
-        this.volume = volume;
+        setVolume(volume);
         this.canal = canal;
         this.marca = marca;
     }
 
     public SmartSpeaker(SmartDevice sd, int volume, String canal, String marca) {
         super(sd);
-        this.volume = volume;
+        setVolume(volume);
         this.canal = canal;
         this.marca = marca;
     }
@@ -40,7 +42,11 @@ public class SmartSpeaker extends SmartDevice {
     }
 
     public void setVolume(int volume){
-        this.volume = volume;
+        if(volume >MAX){this.volume=100;
+        } else if(volume<MIN){
+            this.volume=0;
+        } else
+        {this.volume=volume;}
     }
 
     public String getCanal() {
@@ -60,7 +66,7 @@ public class SmartSpeaker extends SmartDevice {
     }
 
     public double calculoCusto(){
-        return this.volume;
+        return this.getConsumoDiario()*this.getVolume();
     }
 
 

@@ -30,6 +30,14 @@ public class CasaInteligente {
         this.nomeFornecedor = getNomeFornecedor();
     }
 
+    public  CasaInteligente(String nomeP, int nif, String nomeFornecedor){
+        this.nomeP = getNomeP();
+        this.nif = getNif();
+        this.nomeFornecedor = getNomeFornecedor();
+        this.devices = new HashMap<>();
+        this.divisoes = new HashMap<>();
+    }
+
     public CasaInteligente(){
         this.devices =  new HashMap<>();
         this.divisoes = new HashMap<>();
@@ -97,12 +105,23 @@ public class CasaInteligente {
         return (this.divisoes.get(room).contains(code));
     }
 
-    public void addDevice(SmartDevice sd, String divisao){
+    public void addDevice(SmartDevice sd){
         this.devices.put(sd.getCodigo(),sd.clone());
+        }
 
-        for(Map.Entry<String,List<String>> g : divisoes.entrySet()){
-            if(g.getKey().equals(divisao)) {
+    public void addToRoom(String divisao, SmartDevice sd){
+
+        for(Map.Entry<String,List<String>> g : divisoes.entrySet()) {
+            if (g.getKey().equals(divisao)) {
                 g.getValue().add(sd.getCodigo());
+            }
+        }
+    }
+
+    public void addToRoomById(String divisao, String ID){
+        for(Map.Entry<String,List<String>> g : divisoes.entrySet()) {
+            if (g.getKey().equals(divisao)) {
+                g.getValue().add(ID);
             }
         }
     }
