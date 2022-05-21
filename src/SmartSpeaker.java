@@ -66,7 +66,10 @@ public class SmartSpeaker extends SmartDevice {
     }
 
     public double calculoCusto(){
-        return this.getConsumoDiario()*this.getVolume();
+        if  (this.getModo()==Modo.ON) {
+            return this.getConsumoDiario() * this.getVolume();
+        }
+        return 0;
     }
 
 

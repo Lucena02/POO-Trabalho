@@ -6,34 +6,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static POOTrabalho.src.ComercializadoresStrategy.mapFornecedores;
+
 public class CasaInteligente {
     private Map<String,SmartDevice> devices;
     private Map<String, List<String>> divisoes;
     private String nomeP;
     private int nif;
     private String nomeFornecedor;
+    private Fatura fatura;
 
     public CasaInteligente(Map<String, SmartDevice> devices, Map<String, List<String>> divisoes,
-                           String nomeP, int nif, String nomeFornecedor) {
+                           String nomeP, int nif, String nomeFornecedor, Fatura faturas) {
         setDevices(devices);
         setDivisoes(divisoes);
         this.nomeP = nomeP;
         this.nif = nif;
         this.nomeFornecedor = nomeFornecedor;
+        setFatura(faturas);
     }
 
     public CasaInteligente(CasaInteligente casa){
-        this.devices = getDevices();
-        this.divisoes = getDivisoes();
-        this.nomeP = getNomeP();
-        this.nif = getNif();
-        this.nomeFornecedor = getNomeFornecedor();
+        this.devices = casa.getDevices();
+        this.divisoes = casa.getDivisoes();
+        this.nomeP = casa.getNomeP();
+        this.nif = casa.getNif();
+        this.nomeFornecedor = casa.getNomeFornecedor();
+        this.fatura = casa.getFatura();
     }
 
     public  CasaInteligente(String nomeP, int nif, String nomeFornecedor){
-        this.nomeP = getNomeP();
-        this.nif = getNif();
-        this.nomeFornecedor = getNomeFornecedor();
+        this.nomeP = nomeP;
+        this.nif = nif;
+        this.nomeFornecedor = nomeFornecedor;
         this.devices = new HashMap<>();
         this.divisoes = new HashMap<>();
     }
@@ -44,6 +49,7 @@ public class CasaInteligente {
         this.nomeP = "";
         this.nif = 0;
         this.nomeFornecedor = "";
+        this.fatura = new Fatura();
     }
 
     public Map<String, SmartDevice> getDevices() {
@@ -95,6 +101,14 @@ public class CasaInteligente {
 
     public void setNomeFornecedor(String nomeFornecedor) {
         this.nomeFornecedor = nomeFornecedor;
+    }
+
+    public Fatura getFatura() {
+        return fatura.clone();
+    }
+
+    public void setFatura(Fatura fatura) {
+        this.fatura = fatura.clone();
     }
 
     public boolean existsDevice(String codigo){
@@ -173,6 +187,21 @@ public class CasaInteligente {
         return this.divisoes.keySet().contains(room);
     }
 
+
+    public double custoTotalCasa(Long d, Comercializadores c){
+        Integer i = c.getCodigoFornecedor(this.getNomeFornecedor());
+        return mapFornecedores.get(i).formulaEnergia(custoTotalDevices(d));
+    }
+
+
+    public double custoTotalDevices(long dias){
+        return (double) this.devices.values().stream()
+                .map(SmartDevice::clone)
+                .mapToDouble(k -> k.calculoCusto()*dias)
+                .sum();
+    }
+
+
     public  boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -197,16 +226,6 @@ public class CasaInteligente {
                 .append("\nFornecedor: ").append(this.nomeFornecedor);
         return sb.toString();
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

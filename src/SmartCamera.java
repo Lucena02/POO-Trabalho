@@ -77,7 +77,10 @@ public class SmartCamera extends SmartDevice{
 	public SmartCamera clone(){
 		return new SmartCamera(this);
 	}
-	public double calculoCusto(){
-		return this.getConsumoDiario()*(this.getsize()*(this.getresx()+this.getresy()));
-    	}
-}
+	public double calculoCusto() {
+		if  (this.getModo() == Modo.ON) {
+			return this.getConsumoDiario() * (this.getsize() * (this.getresx() + this.getresy()));
+			}
+		return 0;
+		}
+	}

@@ -1,11 +1,14 @@
 package POOTrabalho.src;
 
+import com.sun.source.tree.ReturnTree;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Parser {
     int id;
@@ -18,11 +21,12 @@ public class Parser {
         this.id= id+1;
     }
 
-        public void parse(){
-            List<String> linhas = lerFicheiro("logs.csv");
+        public Vizinhanca parse(){
+            List<String> linhas = lerFicheiro("logs.txt");
             String[] linhaPartida;
             String divisao = null;
             CasaInteligente casaMaisRecente = null;
+            Comercializadores comercializadore = new Comercializadores();
             Vizinhanca comunidade = new Vizinhanca();
             for (String linha : linhas) {
                 linhaPartida = linha.split(":", 2);
@@ -57,15 +61,20 @@ public class Parser {
                         casaMaisRecente.addDevice(ss);
                         casaMaisRecente.addToRoomById(divisao,ss.getCodigo());
                         AumentarID();
+                        System.out.println("Smartspeaker");
                     case "Fornecedor" :
-                        Fornecedor forn = linhaPartida[1];
-                        comunidade.addForn(forn);
+                        System.out.println("dadadadFOrnecedor");
+                        String marca = linhaPartida[1];
+                        int rdmNum = ThreadLocalRandom.current().nextInt(1,4);
+                        comercializadore.addComercializador(marca,rdmNum);
                     default:
                         System.out.println("Linha inválida.");
                         break;
                 }
             }
+            comunidade.setComercializadores(comercializadore);
             System.out.println("done!");
+            return comunidade;
         }
 
         public List<String> lerFicheiro(String nomeFich) {
@@ -89,11 +98,15 @@ public class Parser {
             int diametro = Integer.parseInt(campos[1]);
             int custoDiario = Integer.parseInt(campos[2]);
             String idS = Integer.toString(id);
-            return new SmartBulb(SmartDevice.Modo.OFF,idS,50,custoDiario,tone,diametro);
+            return new SmartBulb(rdmModo(),idS,50,custoDiario,tone,diametro);
         }
 
         public SmartCamera parseSmartCamera(String input){
             String[] campos = input.split(",");
+
+
+
+            return new SmartCamera();
         }
 
         public SmartSpeaker parseSmartSpeaker(String input){
@@ -103,10 +116,15 @@ public class Parser {
             String marca = campos[2];
             int custoDiario = Integer.parseInt(campos[3]);
             String idS = Integer.toString(id);
-            return new SmartSpeaker(SmartDevice.Modo.OFF,idS,50,custoDiario,volume,canal,marca);
+
+            return new SmartSpeaker(rdmModo(),idS,50,custoDiario,volume,canal,marca);
         }
 
-
+        public SmartDevice.Modo rdmModo(){
+            int rdmNum = ThreadLocalRandom.current().nextInt(1,4);
+            if(rdmNum==1) {return SmartDevice.Modo.ON;}
+            return SmartDevice.Modo.OFF;
+        }
 
 
 

@@ -6,19 +6,22 @@ import java.util.stream.Collectors;
 
 public class Vizinhanca {
     private List<CasaInteligente> casaL;
-    private List<Fornecedor> fornecedoresL;
+    private Comercializadores comercializadores;
 
 
     public Vizinhanca(){
         this.casaL= new ArrayList<>();
-        this.fornecedoresL = new ArrayList<>();
+        this.comercializadores = new Comercializadores();
     }
 
-    public Vizinhanca(List<CasaInteligente> casaL, List<Fornecedor> fornecedoresL) {
+    public Vizinhanca(List<CasaInteligente> casaL, Comercializadores comercializadores) {
         setCasaL(casaL);
-        setFornecedoresL(fornecedoresL);
+        setComercializadores(comercializadores);
     }
 
+    public Vizinhanca(Comercializadores comercializadores){
+        setComercializadores(comercializadores);
+    }
     public List<CasaInteligente> getCasaL() {
         return (this.casaL.stream().map(CasaInteligente::clone).collect(Collectors.toList()));
     }
@@ -27,22 +30,25 @@ public class Vizinhanca {
         this.casaL = casaL.stream().map(CasaInteligente::clone).collect(Collectors.toList());
     }
 
-    public List<Fornecedor> getFornecedoresL() {
-        return (this.fornecedoresL.stream().map(Fornecedor::clone).collect(Collectors.toList()));
+    public Comercializadores getComercializadores() {
+        return comercializadores.clone();
     }
 
-    public void setFornecedoresL(List<Fornecedor> fornecedoresL) {
-        this.fornecedoresL = fornecedoresL.stream().map(Fornecedor::clone).collect(Collectors.toList());
+    public void setComercializadores(Comercializadores comercializadores) {
+        this.comercializadores = comercializadores.clone();
     }
 
     public void addCasa(CasaInteligente casa){
         casaL.add(casa.clone());
     }
 
-    public void addForn(Fornecedor forn){
-        fornecedoresL.add(forn.clone());
+    public double calculaCustoVizinhanca(long dias, Comercializadores c){
+        return (double) this.casaL
+                .stream()
+                .map(CasaInteligente::clone)
+                .mapToDouble(k -> k.custoTotalCasa(dias, c))
+                .sum();
     }
-
 
 
 }
