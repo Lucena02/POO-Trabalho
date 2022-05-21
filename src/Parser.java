@@ -21,7 +21,6 @@ public class Parser {
         this.id= id+1;
     }
 
-
         public Vizinhanca parse() throws WrongFileException {
             List<String> linhas = lerFicheiro("src/logs.txt");
             String[] linhaPartida;
