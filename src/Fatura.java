@@ -83,7 +83,7 @@ public class Fatura {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("--------------------")
+        sb.append("\n--------------------")
                 .append("\nFatura de custo: ").append(this.custoDaFatura)
                 .append("\nData Inicio: ").append(this.dataInicio)
                 .append("\nData Final: ").append(this.dataFinal)

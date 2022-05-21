@@ -12,8 +12,8 @@ public class SmartCamera extends SmartDevice{
 		this.size = 0;	
 	}
 
-	public SmartCamera(Modo modo, String codigo, double consumoDiario, double custoInstalacao, int resx, int resy, int size) {
-		super(modo, codigo, consumoDiario, custoInstalacao);
+	public SmartCamera(Modo modo, String codigo,  double custoInstalacao, double consumoDiario, int resx, int resy, int size) {
+		super(modo, codigo, custoInstalacao,consumoDiario);
 		this.resx = resx;
 		this.resy = resy;
 		this.size = size;

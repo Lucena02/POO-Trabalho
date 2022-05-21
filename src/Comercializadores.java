@@ -39,7 +39,6 @@ public class Comercializadores {
         this.comercializadores.put(marca,rdmNum);
     }
 
-
     public Integer getCodigoFornecedor(String marca){
         return this.comercializadores.get(marca);
     }

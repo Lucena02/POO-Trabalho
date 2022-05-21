@@ -70,7 +70,7 @@ public class Parser {
                 }
             }
             comunidade.setComercializadores(comercializadore);
-            System.out.println("done!");
+            System.out.println("Done Parsing!");
             return comunidade;
         }
 

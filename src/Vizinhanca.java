@@ -44,17 +44,16 @@ public class Vizinhanca {
     }
 
 
-    public double calculaCustoVizinhanca(LocalDate start, LocalDate fim,long dias, Comercializadores c){
+    public double calculaCustoVizinhanca(LocalDate start, LocalDate end, long dias, Comercializadores c){
         double d=0;
-        for(CasaInteligente casa : this.casaL){
-            casa.custoTotalCasa(start,fim,dias,c);
+
+        for(CasaInteligente casa : casaL){
+            casa.custoTotalCasa(start, end, dias, c);
             d += casa.getFatura().getCustoDaFatura();
         }
+
         return d;
-
-
-
-
-
     }
+
+
 }

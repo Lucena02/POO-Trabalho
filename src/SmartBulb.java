@@ -10,7 +10,7 @@ public class SmartBulb extends SmartDevice{
     private double diametro;
     public static final int  cpCold=1;
     public static final double  cpNeutral=1.3;
-    public static final double  cpWarm=15;
+    public static final double  cpWarm=1.5;
 
     public SmartBulb(Tone tone, double diametro) {
         this.tone = tone;

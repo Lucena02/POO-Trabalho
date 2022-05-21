@@ -1,12 +1,12 @@
 package POOTrabalho.src;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Estatistica {
 
     public Estatistica(){}
-
     public CasaInteligente casaRica(Vizinhanca vizinhanca){
         CasaInteligente casaR = new CasaInteligente();
         double recorde = 0;
@@ -36,8 +36,7 @@ public class Estatistica {
         Double x = faturas.values().stream().mapToDouble(v -> v).max().orElseThrow(NoSuchElementException::new);
 
         for(Map.Entry<String, Double> entry: faturas.entrySet()) {
-
-            if(entry.getValue() == x) {
+            if(entry.getValue().equals(x)) {
                 return entry.getKey();
             }
         }
@@ -54,6 +53,15 @@ public class Estatistica {
 
         return result;
     }
+
+
+
+
+
+
+
+
+
 
 
 

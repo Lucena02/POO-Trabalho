@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static POOTrabalho.src.ComercializadoresStrategy.mapFornecedores;
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CasaInteligente {
     private Map<String,SmartDevice> devices;
@@ -191,11 +190,11 @@ public class CasaInteligente {
     }
 
 
-
-    public void custoTotalCasa(LocalDate start, LocalDate end,long dias, Comercializadores c){
-        Integer i = c.getCodigoFornecedor(this.getNomeFornecedor());
-        double custoFatura= mapFornecedores.get(i).formulaEnergia(custoTotalDevices(dias));
-        this.fatura= new Fatura(custoFatura,start,end,this.getNomeFornecedor());
+    public void custoTotalCasa(LocalDate start, LocalDate end, long d, Comercializadores c){
+        String nomeForn = this.getNomeFornecedor();
+        Integer i = c.getCodigoFornecedor(nomeForn);
+        double custoFatura = mapFornecedores.get(i).formulaEnergia(custoTotalDevices(d));
+        this.fatura = new Fatura(custoFatura, start, end, nomeForn);
     }
 
 
@@ -232,7 +231,7 @@ public class CasaInteligente {
                 .append("\nDivisoes: ").append(this.divisoes)
                 .append("\nDevices: ").append(this.devices)
                 .append("\nFornecedor: ").append(this.nomeFornecedor)
-                .append("\nFaturas: \n").append(this.fatura.toString());
+                .append("\nFaturas: ").append(this.fatura.toString());
         return sb.toString();
     }
 
