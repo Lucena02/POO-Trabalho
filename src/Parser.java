@@ -21,7 +21,8 @@ public class Parser {
         this.id= id+1;
     }
 
-        public Vizinhanca parse(){
+
+        public Vizinhanca parse() throws WrongFileException {
             List<String> linhas = lerFicheiro("src/logs.txt");
             String[] linhaPartida;
             String divisao = null;
@@ -36,26 +37,26 @@ public class Parser {
                         comunidade.addCasa(casaMaisRecente);
                         break;
                     case "Divisao":
-                        if (casaMaisRecente == null) System.out.println("Linha inválida1.");
+                        if (casaMaisRecente == null) throw new WrongFileException();
                         divisao = linhaPartida[1];
                         casaMaisRecente.addRoom(divisao);
                         break;
                     case "SmartBulb":
-                        if (divisao == null) System.out.println("Linha inválida2.");
+                        if (divisao == null) throw new WrongFileException();
                         SmartBulb sb = parseSmartBulb(linhaPartida[1]);
                         casaMaisRecente.addDevice(sb);
                         casaMaisRecente.addToRoomById(divisao,sb.getCodigo());
                         AumentarID();
                         break;
                     case "SmartCamera":
-                        if (divisao == null) System.out.println("Linha inválida3.");
+                        if (divisao == null) throw new WrongFileException();
                         SmartCamera sc = parseSmartCamera(linhaPartida[1]);
                         casaMaisRecente.addDevice(sc);
                         casaMaisRecente.addToRoomById(divisao,sc.getCodigo());
                         AumentarID();
                         break;
                     case "SmartSpeaker":
-                        if (divisao == null) System.out.println("Linha inválida4.");
+                        if (divisao == null) throw new WrongFileException();
                         SmartSpeaker ss = parseSmartSpeaker(linhaPartida[1]);
                         casaMaisRecente.addDevice(ss);
                         casaMaisRecente.addToRoomById(divisao,ss.getCodigo());
@@ -67,8 +68,7 @@ public class Parser {
                         comercializadore.addComercializador(marca,rdmNum);
                         break;
                     default:
-                        System.out.println("Linha inválida5.");
-                        break;
+                        throw new WrongFileException();
                 }
             }
             comunidade.setComercializadores(comercializadore);

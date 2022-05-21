@@ -202,7 +202,7 @@ public class CasaInteligente {
                 .sum();
     }
 
-
+    @Override
     public  boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -214,17 +214,21 @@ public class CasaInteligente {
                 this.nomeFornecedor.equals(that.getNomeFornecedor());
     }
 
+    @Override
     public CasaInteligente clone(){
         return new CasaInteligente(this);
     }
 
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("CasaInteligente de: ").append(this.nomeP)
                 .append("\nNif: ").append(this.nif)
                 .append("\nDivisoes: ").append(this.divisoes)
                 .append("\nDevices: ").append(this.devices)
-                .append("\nFornecedor: ").append(this.nomeFornecedor);
+                .append("\nFornecedor: ").append(this.nomeFornecedor)
+                .append("\nFaturas: ").append(this.fatura.toString());
         return sb.toString();
     }
 
