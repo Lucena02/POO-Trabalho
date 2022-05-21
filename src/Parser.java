@@ -22,7 +22,7 @@ public class Parser {
     }
 
         public Vizinhanca parse(){
-            List<String> linhas = lerFicheiro("logs.txt");
+            List<String> linhas = lerFicheiro("src/logs.txt");
             String[] linhaPartida;
             String divisao = null;
             CasaInteligente casaMaisRecente = null;
@@ -36,39 +36,38 @@ public class Parser {
                         comunidade.addCasa(casaMaisRecente);
                         break;
                     case "Divisao":
-                        if (casaMaisRecente == null) System.out.println("Linha inválida.");
+                        if (casaMaisRecente == null) System.out.println("Linha inválida1.");
                         divisao = linhaPartida[1];
                         casaMaisRecente.addRoom(divisao);
-                        //(...)
                         break;
                     case "SmartBulb":
-                        if (divisao == null) System.out.println("Linha inválida.");
+                        if (divisao == null) System.out.println("Linha inválida2.");
                         SmartBulb sb = parseSmartBulb(linhaPartida[1]);
                         casaMaisRecente.addDevice(sb);
                         casaMaisRecente.addToRoomById(divisao,sb.getCodigo());
                         AumentarID();
-                        //(...)
                         break;
                     case "SmartCamera":
-                        if (divisao == null) System.out.println("Linha inválida.");
+                        if (divisao == null) System.out.println("Linha inválida3.");
                         SmartCamera sc = parseSmartCamera(linhaPartida[1]);
                         casaMaisRecente.addDevice(sc);
                         casaMaisRecente.addToRoomById(divisao,sc.getCodigo());
                         AumentarID();
+                        break;
                     case "SmartSpeaker":
-                        if (divisao == null) System.out.println("Linha inválida.");
+                        if (divisao == null) System.out.println("Linha inválida4.");
                         SmartSpeaker ss = parseSmartSpeaker(linhaPartida[1]);
                         casaMaisRecente.addDevice(ss);
                         casaMaisRecente.addToRoomById(divisao,ss.getCodigo());
                         AumentarID();
-                        System.out.println("Smartspeaker");
+                        break;
                     case "Fornecedor" :
-                        System.out.println("dadadadFOrnecedor");
                         String marca = linhaPartida[1];
                         int rdmNum = ThreadLocalRandom.current().nextInt(1,4);
                         comercializadore.addComercializador(marca,rdmNum);
+                        break;
                     default:
-                        System.out.println("Linha inválida.");
+                        System.out.println("Linha inválida5.");
                         break;
                 }
             }
@@ -95,18 +94,21 @@ public class Parser {
         public SmartBulb parseSmartBulb(String input){
             String[] campos = input.split(",");
             SmartBulb.Tone tone = SmartBulb.Tone.valueOf(campos[0]);
-            int diametro = Integer.parseInt(campos[1]);
-            int custoDiario = Integer.parseInt(campos[2]);
+            double diametro = Double.parseDouble(campos[1]);
+            double custoDiario = Double.parseDouble(campos[2]);
             String idS = Integer.toString(id);
-            return new SmartBulb(rdmModo(),idS,50,custoDiario,tone,diametro);
+            return new SmartBulb(rdmModo(),idS,20,custoDiario,tone,diametro);
         }
 
         public SmartCamera parseSmartCamera(String input){
             String[] campos = input.split(",");
-
-
-
-            return new SmartCamera();
+            String[] cameraRes = campos[0].split("x");
+            int cameraX = Integer.parseInt(cameraRes[0].substring(1));
+            int cameraY = Integer.parseInt(cameraRes[1].substring(0,cameraRes[1].length()-1));
+            int size = Integer.parseInt(campos[1]);
+            double custoDiario = Double.parseDouble(campos[2]);
+            String idS = Integer.toString(id);
+            return new SmartCamera(rdmModo(),idS,50,custoDiario,cameraX,cameraY,size);
         }
 
         public SmartSpeaker parseSmartSpeaker(String input){
@@ -114,10 +116,10 @@ public class Parser {
             int volume= Integer.parseInt(campos[0]);
             String canal = campos[1];
             String marca = campos[2];
-            int custoDiario = Integer.parseInt(campos[3]);
+            double custoDiario = Double.parseDouble(campos[3]);
             String idS = Integer.toString(id);
 
-            return new SmartSpeaker(rdmModo(),idS,50,custoDiario,volume,canal,marca);
+            return new SmartSpeaker(rdmModo(),idS,15,custoDiario,volume,canal,marca);
         }
 
         public SmartDevice.Modo rdmModo(){

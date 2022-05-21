@@ -12,7 +12,7 @@ public class Simulacao {
             Vizinhanca vizinhanca = p.parse();
 
             LocalDate start = LocalDate.parse("2020-11-03");
-            LocalDate end = LocalDate.parse("2020-12-15");
+            LocalDate end = LocalDate.parse("2020-11-04");
 
             long dias = DAYS.between(start, end);
             Comercializadores comercializadores = vizinhanca.getComercializadores();
