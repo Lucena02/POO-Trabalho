@@ -64,8 +64,7 @@ public class Parser {
                         break;
                     case "Fornecedor" :
                         String marca = linhaPartida[1];
-                        int rdmNum = ThreadLocalRandom.current().nextInt(1,4);
-                        comercializadore.addComercializador(marca,rdmNum);
+                        comercializadore.addComercializador(marca);
                         break;
                     default:
                         throw new WrongFileException();

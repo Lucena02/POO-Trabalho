@@ -1,5 +1,6 @@
 package POOTrabalho.src;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,13 +43,18 @@ public class Vizinhanca {
         casaL.add(casa);
     }
 
-    public double calculaCustoVizinhanca(long dias, Comercializadores c){
-        return (double) this.casaL
-                .stream()
-                .map(CasaInteligente::clone)
-                .mapToDouble(k -> k.custoTotalCasa(dias, c))
-                .sum();
+
+    public double calculaCustoVizinhanca(LocalDate start, LocalDate fim,long dias, Comercializadores c){
+        double d=0;
+        for(CasaInteligente casa : this.casaL){
+            casa.custoTotalCasa(start,fim,dias,c);
+            d += casa.getFatura().getCustoDaFatura();
+        }
+        return d;
+
+
+
+
+
     }
-
-
 }

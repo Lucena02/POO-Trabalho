@@ -2,6 +2,7 @@ package POOTrabalho.src;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Comercializadores {
 
@@ -33,9 +34,11 @@ public class Comercializadores {
         this.comercializadores = new HashMap<>(comercializadores);
     }
 
-    public void addComercializador(String marca, Integer i){
-        this.comercializadores.put(marca,i);
+    public void addComercializador(String marca){
+        int rdmNum = ThreadLocalRandom.current().nextInt(1,4);
+        this.comercializadores.put(marca,rdmNum);
     }
+
 
     public Integer getCodigoFornecedor(String marca){
         return this.comercializadores.get(marca);

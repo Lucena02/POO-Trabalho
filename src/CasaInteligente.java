@@ -1,5 +1,6 @@
 package POOTrabalho.src;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static POOTrabalho.src.ComercializadoresStrategy.mapFornecedores;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CasaInteligente {
     private Map<String,SmartDevice> devices;
@@ -189,9 +191,11 @@ public class CasaInteligente {
     }
 
 
-    public double custoTotalCasa(Long d, Comercializadores c){
+
+    public void custoTotalCasa(LocalDate start, LocalDate end,long dias, Comercializadores c){
         Integer i = c.getCodigoFornecedor(this.getNomeFornecedor());
-        return mapFornecedores.get(i).formulaEnergia(custoTotalDevices(d));
+        double custoFatura= mapFornecedores.get(i).formulaEnergia(custoTotalDevices(dias));
+        this.fatura= new Fatura(custoFatura,start,end,this.getNomeFornecedor());
     }
 
 
@@ -228,7 +232,7 @@ public class CasaInteligente {
                 .append("\nDivisoes: ").append(this.divisoes)
                 .append("\nDevices: ").append(this.devices)
                 .append("\nFornecedor: ").append(this.nomeFornecedor)
-                .append("\nFaturas: ").append(this.fatura.toString());
+                .append("\nFaturas: \n").append(this.fatura.toString());
         return sb.toString();
     }
 

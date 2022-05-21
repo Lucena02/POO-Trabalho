@@ -84,11 +84,11 @@ public class Fatura {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("--------------------")
-                .append("Fatura de custo: ").append(this.custoDaFatura)
+                .append("\nFatura de custo: ").append(this.custoDaFatura)
                 .append("\nData Inicio: ").append(this.dataInicio)
                 .append("\nData Final: ").append(this.dataFinal)
                 .append("\nFornecedor: ").append(this.fornecedor)
-                .append("--------------------");
+                .append("\n--------------------");
         return sb.toString();
     }
 

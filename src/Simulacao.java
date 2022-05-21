@@ -10,7 +10,6 @@ public class Simulacao {
         public static void main(String[] args) throws WrongFileException {
             Parser p = new Parser();
             Vizinhanca vizinhanca = p.parse();
-            System.out.println(vizinhanca.getCasaL().size());
             //System.out.println("Introduz uma data: ");
 
             LocalDate start = LocalDate.parse("2020-11-03");
@@ -18,12 +17,13 @@ public class Simulacao {
 
             long dias = DAYS.between(start, end);
             Comercializadores comercializadores = vizinhanca.getComercializadores();
-            double custo = vizinhanca.calculaCustoVizinhanca(dias, comercializadores);
+            double custo = vizinhanca.calculaCustoVizinhanca(start,end, dias, comercializadores);
             System.out.println("dada");
             System.out.println(custo);
 
-
-
+            Estatistica stats = new Estatistica();
+            CasaInteligente casa = stats.casaRica(vizinhanca);
+            System.out.println(casa);
 
 
 
