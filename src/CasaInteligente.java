@@ -41,7 +41,6 @@ public class CasaInteligente {
         this.nomeFornecedor = nomeFornecedor;
         this.devices = new HashMap<>();
         this.divisoes = new HashMap<>();
-        this.fatura = new Fatura();
     }
 
     public CasaInteligente(){

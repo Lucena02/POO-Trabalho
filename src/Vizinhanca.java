@@ -39,7 +39,7 @@ public class Vizinhanca {
     }
 
     public void addCasa(CasaInteligente casa){
-        casaL.add(casa);
+        casaL.add(casa.clone());
     }
 
     public double calculaCustoVizinhanca(long dias, Comercializadores c){

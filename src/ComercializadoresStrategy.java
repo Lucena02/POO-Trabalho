@@ -14,6 +14,9 @@ public class ComercializadoresStrategy {
     );
 
 
+    public double d() {
+       return this.mapFornecedores.get(1).formulaEnergia(22.0);
+    }
 
 
 

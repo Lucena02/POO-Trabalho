@@ -20,7 +20,6 @@ public class Estatistica {
         return casaR;
     }
 
-<<<<<<< HEAD
 
     public String ComercializadorRico(Vizinhanca vizinhanca) throws NoSuchElementException{
         Map<String, Double> faturas = new HashMap<>(); // cada Comercializador tem um número
@@ -56,7 +55,5 @@ public class Estatistica {
     }
 
 
-=======
->>>>>>> 26e82a41995678077097536ea6d51a45729a8b50
 
 }

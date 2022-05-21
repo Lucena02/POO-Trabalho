@@ -14,7 +14,7 @@ public class Simulacao {
             //System.out.println("Introduz uma data: ");
 
             LocalDate start = LocalDate.parse("2020-11-03");
-            LocalDate end = LocalDate.parse("2020-11-04");
+            LocalDate end = LocalDate.parse("2020-12-15");
 
             long dias = DAYS.between(start, end);
             Comercializadores comercializadores = vizinhanca.getComercializadores();

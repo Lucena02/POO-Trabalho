@@ -67,9 +67,9 @@ public class SmartCamera extends SmartDevice{
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString())
-			.append("\nRes x: ").append(this.resx)
-			.append("\nRes y: ").append(this.resy)
-			.append("\nSize: ").append(this.size);
+			.append("Res x: ").append(this.resx)
+			.append("Res y: ").append(this.resy) 
+			.append("Size: ").append(this.size);
 		return sb.toString();
 	}
 
@@ -79,7 +79,7 @@ public class SmartCamera extends SmartDevice{
 	}
 	public double calculoCusto() {
 		if  (this.getModo() == Modo.ON) {
-			return this.getConsumoDiario() + ((this.getsize()*0.1) * (this.getresx() + this.getresy())*0.001);
+			return this.getConsumoDiario() * (this.getsize() * (this.getresx() + this.getresy()));
 			}
 		return 0;
 		}
