@@ -67,5 +67,30 @@ public class Fatura {
     public  Fatura clone()  {
         return new Fatura(this);
     }
+
+    @Override
+    public  boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fatura that = (Fatura) o;
+        return this.custoDaFatura == that.getCustoDaFatura() &&
+                this.dataInicio.equals(that.getDataInicio()) &&
+                this.dataFinal.equals(that.getDataFinal()) &&
+                this.fornecedor.equals(that.getFornecedor());
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--------------------")
+                .append("Fatura de custo: ").append(this.custoDaFatura)
+                .append("\nData Inicio: ").append(this.dataInicio)
+                .append("\nData Final: ").append(this.dataFinal)
+                .append("\nFornecedor: ").append(this.fornecedor)
+                .append("--------------------");
+        return sb.toString();
+    }
+
 }
 

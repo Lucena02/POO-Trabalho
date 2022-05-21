@@ -7,9 +7,11 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class Simulacao {
 
 
-        public static void main(String[] args){
+        public static void main(String[] args) throws WrongFileException {
             Parser p = new Parser();
             Vizinhanca vizinhanca = p.parse();
+            System.out.println(vizinhanca.getCasaL().size());
+            //System.out.println("Introduz uma data: ");
 
             LocalDate start = LocalDate.parse("2020-11-03");
             LocalDate end = LocalDate.parse("2020-12-15");
